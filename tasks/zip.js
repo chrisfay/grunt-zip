@@ -121,6 +121,8 @@ module.exports = function(grunt) {
     // Iterate over the srcFiles
     var filesWritten = false;
     srcFiles.forEach(function (filepath) {
+      var fullPathToZip = filepath;
+
       // Read in the contents
       var input = fs.readFileSync(filepath);
 
@@ -136,7 +138,7 @@ module.exports = function(grunt) {
         // Find the content
         var fileObj = files[filename],
             content = fileObj.asNodeBuffer(),
-            routedName = router(filename);
+            routedName = router(filename, fullPathToZip); //include the full original zip path as param to router()
 
         // If there is a file path (allows for skipping)
         if (routedName) {
